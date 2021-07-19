@@ -41,6 +41,8 @@
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = doogether/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		86226F0DC905794F174FF57D /* Pods-doogether.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-doogether.debug.xcconfig"; path = "Target Support Files/Pods-doogether/Pods-doogether.debug.xcconfig"; sourceTree = "<group>"; };
 		B94F5BDCC74917CB37186AAC /* Pods-doogether-doogetherTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-doogether-doogetherTests.release.xcconfig"; path = "Target Support Files/Pods-doogether-doogetherTests/Pods-doogether-doogetherTests.release.xcconfig"; sourceTree = "<group>"; };
+		BEFA9DC626A5F5C900CF9B54 /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
+		BEFA9DC726A5F5C900CF9B54 /* MaterialIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		C46F60B3186E64BCCE3C93FC /* libPods-doogether.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-doogether.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E884FA22F504F14B26E8B83A /* libPods-doogether-doogetherTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-doogether-doogetherTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
@@ -86,6 +88,7 @@
 		13B07FAE1A68108700A75B9A /* doogether */ = {
 			isa = PBXGroup;
 			children = (
+				BEFA9DC526A5F58000CF9B54 /* Fonts */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -145,8 +148,16 @@
 				71CE0D2F5B0CA82C09649565 /* Pods-doogether-doogetherTests.debug.xcconfig */,
 				B94F5BDCC74917CB37186AAC /* Pods-doogether-doogetherTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		BEFA9DC526A5F58000CF9B54 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				BEFA9DC626A5F5C900CF9B54 /* FontAwesome.ttf */,
+				BEFA9DC726A5F5C900CF9B54 /* MaterialIcons.ttf */,
+			);
+			name = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
