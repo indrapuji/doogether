@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, Dimensions, Image, useWindowDimensions } from "react-native";
+import { View, Text, Image, useWindowDimensions } from "react-native";
 import axios from "axios";
 import SkeletonPlaceholder from "react-native-skeleton-placeholder";
 

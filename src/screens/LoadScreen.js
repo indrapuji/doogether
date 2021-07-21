@@ -1,6 +1,5 @@
 import React from "react";
 import { StyleSheet, View, Image, StatusBar, ActivityIndicator } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const LoadScreen = () => {
   return (

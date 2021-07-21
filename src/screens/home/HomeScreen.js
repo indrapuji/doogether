@@ -145,7 +145,7 @@ const styles = StyleSheet.create({
   },
   topSection: {
     marginHorizontal: 20,
-    marginTop: 50,
+    // marginTop: 50,
   },
   title: {
     fontWeight: "700",

@@ -1,10 +1,10 @@
 import React, { useState, useRef } from "react";
-import { StyleSheet, View, FlatList, StatusBar, Image, useWindowDimensions, Animated, Platform } from "react-native";
+import { StyleSheet, View, FlatList, StatusBar, useWindowDimensions, Animated } from "react-native";
 import OnboardingItem from "../../components/onboarding/OnboardingItem";
 import slide from "../../components/onboarding/slide";
 import Paginator from "../../components/onboarding/Paginator";
 
-const Onboarding = ({ navigation }) => {
+const Onboarding = ({}) => {
   const { width } = useWindowDimensions();
   const [currentIndex, setCurrentIndex] = useState(0);
 
