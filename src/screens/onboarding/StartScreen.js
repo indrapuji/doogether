@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   StyleSheet,
   Text,
@@ -10,36 +10,88 @@ import {
   TextInput,
   KeyboardAvoidingView,
   Platform,
+  ActivityIndicator,
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
+import GetLocation from "react-native-get-location";
+import { AuthContext } from "../../components/Context";
 
-const StartScreen = ({ navigation }) => {
+const StartScreen = () => {
   const { width } = useWindowDimensions();
   const [hide, setHide] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [failed, setFailed] = useState(false);
+
+  const { signIn } = useContext(AuthContext);
+
+  const [val, setVal] = useState({
+    lat: "",
+    long: "",
+  });
   const [inputText, setInputText] = useState({
     username: "",
     password: "",
   });
 
-  const focusInput = () => {
-    setHide(true);
+  useEffect(() => {
+    GetLocation.getCurrentPosition({
+      enableHighAccuracy: true,
+      timeout: 15000,
+    })
+      .then((location) => {
+        setVal({ ...val, lat: location.latitude, long: location.longitude });
+      })
+      .catch((error) => {
+        const { code, message } = error;
+        console.warn(code, message);
+      });
+  }, []);
+
+  const failLogin = () => {
+    setFailed(true);
+    setInputText("");
+    setTimeout(() => {
+      setFailed(false);
+    }, 2000);
   };
-  const endInput = () => {
-    setHide(false);
+
+  const loginHanddle = (username, password) => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+      if (username === "admin" && password === "admin") {
+        const access_token = "ini token";
+        signIn(access_token, val.lat, val.long);
+      } else {
+        failLogin();
+      }
+    }, 2000);
   };
+
   return (
-    <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={styles.container}>
-      <StatusBar barStyle="dark-content" hidden={false} />
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={styles.container}
+    >
+      <StatusBar barStyle="dark-content" hidden={false} backgroundColor="white" />
       <View style={styles.imageContainer}>
+        <View style={{ marginTop: 50 }}>
+          <Text style={styles.title}>Hello Again!</Text>
+          <Text style={styles.title}>Welcome back</Text>
+        </View>
         {!hide && (
-          <View style={{ marginTop: 50 }}>
-            <Text style={styles.title}>Hello Again!</Text>
-            <Text style={styles.title}>Welcome back</Text>
-          </View>
+          <Image
+            source={require("../../assets/home_vector.png")}
+            style={{ width: width - 60.82, resizeMode: "contain" }}
+          />
         )}
-        <Image source={require("../../assets/home_vector.png")} style={{ width: width - 60.82, resizeMode: "contain" }} />
       </View>
       <View style={styles.buttonSection}>
+        {failed && (
+          <View style={{ marginBottom: 10 }}>
+            <Text style={{ color: "red" }}>Username atau Password Salah</Text>
+          </View>
+        )}
         <View style={styles.inputMargin}>
           <View style={styles.inputMargin}>
             <View style={styles.iconPosition}>
@@ -52,8 +104,8 @@ const StartScreen = ({ navigation }) => {
               autoCapitalize="none"
               onChangeText={(text) => setInputText({ ...inputText, username: text })}
               value={inputText.username}
-              onFocus={() => focusInput()}
-              onEndEditing={() => endInput()}
+              onFocus={() => setHide(true)}
+              onEndEditing={() => setHide(false)}
             />
           </View>
           <View style={{ position: "relative" }}>
@@ -65,18 +117,26 @@ const StartScreen = ({ navigation }) => {
               placeholder="Password"
               placeholderTextColor="rgba(0, 0, 0, 0.14)"
               autoCapitalize="none"
+              secureTextEntry
               onChangeText={(text) => setInputText({ ...inputText, password: text })}
               value={inputText.password}
-              onFocus={() => focusInput()}
-              onEndEditing={() => endInput()}
+              onFocus={() => setHide(true)}
+              onEndEditing={() => setHide(false)}
             />
           </View>
         </View>
-        <TouchableOpacity onPress={() => navigation.navigate("Register")}>
+        {loading ? (
           <View style={[styles.loginButton, { width: width - 48 }]}>
-            <Text style={styles.loginText}>Login</Text>
+            <ActivityIndicator size="small" color="white" />
           </View>
-        </TouchableOpacity>
+        ) : (
+          <TouchableOpacity
+            style={[styles.loginButton, { width: width - 48 }]}
+            onPress={() => loginHanddle(inputText.username, inputText.password)}
+          >
+            <Text style={styles.loginText}>Login</Text>
+          </TouchableOpacity>
+        )}
       </View>
     </KeyboardAvoidingView>
   );
@@ -87,7 +147,8 @@ export default StartScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
+    // alignItems: "center",
+    paddingHorizontal: 20,
     backgroundColor: "white",
   },
   title: {
@@ -96,7 +157,7 @@ const styles = StyleSheet.create({
     color: "#16948c",
   },
   imageContainer: {
-    flex: 0.7,
+    flex: 1,
     justifyContent: "center",
   },
   iconPosition: {
