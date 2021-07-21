@@ -8,13 +8,19 @@ const OnboardingItem = ({ item }) => {
 
   return (
     <View style={[styles.container, { width }]}>
-      <Image source={item.image} style={[styles.image, { width: width - 60.82, resizeMode: "contain" }]} />
+      <Image
+        source={item.image}
+        style={[styles.image, { width: width - 60.82, resizeMode: "contain" }]}
+      />
       <View style={{ flex: 0.2 }}>
         <Text style={styles.title}>{item.title}</Text>
         <Text style={styles.description}>{item.description}</Text>
       </View>
       <TouchableOpacity
-        style={[styles.button, { width: width - 48, backgroundColor: item.button ? "#16948c" : null }]}
+        style={[
+          styles.button,
+          { width: width - 48, backgroundColor: item.button ? "#16948c" : null },
+        ]}
         onPress={() => navigation.navigate("Start")}
       >
         <Text style={styles.text}>Lanjutkan</Text>

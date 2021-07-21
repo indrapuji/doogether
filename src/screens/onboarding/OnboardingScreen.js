@@ -14,6 +14,7 @@ const Onboarding = ({ navigation }) => {
     setCurrentIndex(viewableItems[0].index);
   }).current;
   const viewConfig = useRef({ viewAreaCoveragePercentThreshold: 50 }).current;
+
   return (
     <View style={styles.container}>
       <StatusBar barStyle="dark-content" hidden={false} />
